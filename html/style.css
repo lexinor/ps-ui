@@ -549,17 +549,17 @@ body::-webkit-scrollbar {
 
 
 .success {
-  background: rgba(21, 100, 15, 0.95);
+  background: rgba(54, 156, 80, 0.85);
   color: #fff;
 }
 
 .primary {
-  background-color: rgba(44, 63, 80, 0.85);
+  background-color: rgba(51, 112, 165, 0.85);
   color: #ffffff;
 }
 
 .error {
-  background: rgba(181, 82, 85, 0.85);
+  background-color: rgba(181, 82, 85, 0.85);
   color: #fff;
 }
 
