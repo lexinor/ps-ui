@@ -259,4 +259,17 @@ window.addEventListener('message', (event) => {
         
         StartScrambler();
     }
-  });
+});
+
+document.addEventListener("keydown", function(ev) {
+    let key_pressed = ev.key;
+    let valid_keys = ['Escape'];
+  
+    if (scrambler_started === true && valid_keys.includes(key_pressed)) {
+        switch (key_pressed) {
+            case 'Escape':
+                CheckScrambler()
+                break;
+        }
+    }
+});

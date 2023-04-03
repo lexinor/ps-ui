@@ -1,5 +1,6 @@
 var timer_start, timer_game, timer_finish, timer_time, good_positions, wrong, wrong_max, right, speed, timerStart, positions;
 var thermite_started = false;
+let thermite_init = false
 
 
 var mode = 7;
@@ -83,7 +84,7 @@ function StartThermite() {
     let div = document.createElement('div');
     div.classList.add('thermite-group');
     div.style.width = mode_data[mode][1];
-    div.style.height = mode_data[mode][1];
+    div.style.height = mode_data[mode][1];    
     const groups = document.querySelector('.thermite-groups');
     for(let i=0; i < positions.length; i++){
         let group = div.cloneNode();
@@ -132,14 +133,17 @@ function ThermiteTimer() {
 
 function StopThermiteTimer() {
     clearInterval(timer_time);
+    thermite_init = false
 }
 
 function ResetThermiteTimer() {
     clearInterval(timer_time);
+    thermite_init = false
 }
 
 window.addEventListener('message', (event) => {
   if (event.data.action === 'thermite-start') {
+    thermite_init = true
     speed = event.data.time
     mode = event.data.gridsize
     if (mode < 5 || mode > 10) {
@@ -151,7 +155,7 @@ window.addEventListener('message', (event) => {
     document.querySelector('.thermite').classList.remove('hidden');
     document.querySelector('.thermite-splash').classList.remove('hidden');
     document.querySelector('.thermite-splash .thermite-text').innerHTML = 'Network Access Blocked... Override Required';
-    sleep(3000, function() {
+    sleep(500, function() {
         StartThermite();
     });
   }
@@ -161,7 +165,7 @@ document.addEventListener("keydown", function(ev) {
   let key_pressed = ev.key;
   let valid_keys = ['Escape'];
 
-  if (thermite_started && valid_keys.includes(key_pressed)) {
+  if (thermite_init && valid_keys.includes(key_pressed)) {
       switch (key_pressed) {
           case 'Escape':
               thermite_started = false;
